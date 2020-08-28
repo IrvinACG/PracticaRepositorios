@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="/components/plantilla :: head(page='Cursos')">     
+    </head>
+    <body>
+
+        <header th:replace="/components/plantilla :: header(titulo='CRUD CURSOS')">
+        </header>
+
+        <div class="container py-5" style="height: 80vh;">
+            <div class="container d-flex justify-content-center">
+                <table class="text-center" border="1">
+                    <thead>
+                        <tr>
+                            <th>Id Curso</th>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
+                            <th>Horas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="curso : ${cursos}">
+                            <td th:text="${curso.idCurso}"></td>
+                            <td th:text="${curso.nombre}"></td>
+                            <td th:text="${curso.descripcion}"></td>
+                            <td th:text="${curso.precio}"></td>
+                            <td th:text="${curso.horas}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr/>
+            <div class="container d-flex justify-content-center">
+                <form th:action="@{/cursos/guardar}" th:object="${curso}" method="POST">
+                    <label for="nombre">Nombre: </label>
+                    <input type="text" name="nombre" th:field="*{nombre}"/>
+                    <br/>
+                    <label for="descripcion">Descripcion: </label>
+                    <input type="text" name="descripcion" th:field="*{descripcion}"/>
+                    <br/>
+                    <label for="precio">Precio: </label>
+                    <input type="number" name="precio" th:field="*{precio}"/>
+                    <br/>
+                    <label for="horas">Horas: </label>
+                    <input type="number" name="horas" th:field="*{horas}"/>
+                    <br/>
+                    <input type="submit" th:value="Guardar" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+
+
+        <footer th:replace="/components/plantilla :: footer"></footer>
+    </body>
+</html>
